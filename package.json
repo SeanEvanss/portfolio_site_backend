@@ -1,0 +1,26 @@
+{
+    "name": "portfolio_site_backend",
+    "version": "1.0.0",
+    "description": "This is intended to be the source code for the backend portion of my portfolio page. It's using NodeJS with express as the framework as well as MongoDB as our main DB.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/SeanEvanss/portfolio_site_backend.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/SeanEvanss/portfolio_site_backend/issues"
+    },
+    "homepage": "https://github.com/SeanEvanss/portfolio_site_backend#readme",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "dotenv": "^10.0.0",
+        "express": "^4.17.1",
+        "mongodb": "^4.1.3"
+    }
+}
