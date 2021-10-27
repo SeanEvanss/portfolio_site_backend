@@ -7,7 +7,6 @@ const BodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectID;
 
-//const uri= "mongodb+srv://main:7AxGVDxE3DJ3n5@react-portfolio-cluster.a42hy.mongodb.net/Messages?retryWrites=true&w=majority";
 const uri= process.env.MONGODB_URI;
 const databaseName = "Messages";
 
