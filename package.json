@@ -2,7 +2,7 @@
     "name": "portfolio_site_backend",
     "version": "1.0.0",
     "description": "This is intended to be the source code for the backend portion of my portfolio page. It's using NodeJS with express as the framework as well as MongoDB as our main DB.",
-    "main": "index.js",
+    "main": "app.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
