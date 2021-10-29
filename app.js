@@ -6,11 +6,14 @@ const Mongoose = require('mongoose');
 const mongodb= require('mongodb');
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectID;
+const helmet = require('helmet');
 
 const uri= process.env.MONGODB_URI;
 const databaseName = "Messages";
 
 var app = Express();
+app.use(helmet());
+
 app.use(Express.json());
 app.use(Express.urlencoded({ extended: true }));
 app.listen(PORT, () => {    
