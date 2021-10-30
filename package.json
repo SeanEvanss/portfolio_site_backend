@@ -6,7 +6,6 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "nodemon app.js"
-
     },
     "repository": {
         "type": "git",
@@ -20,9 +19,9 @@
     },
     "homepage": "https://github.com/SeanEvanss/portfolio_site_backend#readme",
     "dependencies": {
-        "body-parser": "^1.19.0",
         "dotenv": "^10.0.0",
         "express": "^4.17.1",
+        "helmet": "^4.6.0",
         "mongodb": "^4.1.3",
         "mongoose": "^6.0.12",
         "nodemon": "^2.0.14"
