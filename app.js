@@ -21,6 +21,7 @@ db.once('open', function () {
     console.log('Connected to MongoDB');
 });
 
+//load our API routes
 app.use(Routes);
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
