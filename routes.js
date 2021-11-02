@@ -13,20 +13,48 @@ app.use(helmet());
 
 app.post('/users', async (req, res) => {
     const user = new UserModel(req.body);
+    //Joi input validation
     var err = user.joiValidate(req.body);
-    
-    if (err) {
-        console.log(err["error"]);
-        res.status(400).send(err);
+    //console.log(err.error);
+    if (err.error) {
+        console.log(err.error.details[0].message);
+        res.status(400).send(err.error.details[0].message);
     }
     else {
         try {
-            await user.save();
-            res.send(user);
+            //Computes our API key's hash
+            var hash = crypto.createHash('sha256').update(req.headers.apikey).digest('base64');
+            const apiKeyFound = await apiKeyModel.findOne({ apiKey: hash });
+            //If hashed key has been found, we proceed with the POST request
+            if (apiKeyFound) {
+                await user.save();
+                res.status(201).send('OK, message successfully posted');           
+            }
+            else{
+                res.status(401).send({ error: "Invalid API key" });
+            }
         }
         catch (e) {
             res.status(500).send(e);
         }
+    }
+});
+
+app.get('/users', async (req, res) => {        
+    try {
+        var hash = crypto.createHash('sha256').update(req.headers.apikey).digest('base64');
+        //console.log(hash);    
+        const apiKeyFound = await apiKeyModel.findOne({ apiKey: hash });
+        if (apiKeyFound) {
+            const users = await UserModel.find({});
+            res.send(users);
+        }
+        else {
+            res.status(401).send("Invalid API key");
+        }
+    }
+    catch (e) {
+        res.status(500).send(e);
     }
 });
 
@@ -41,25 +69,6 @@ app.post('/apiKey', async (req, res) => {
     try {
         await apiKey.save();
         res.send(apiKey);
-    }
-    catch (e) {
-        res.status(500).send(e);
-    }
-});
-
-app.get('/users', async (req, res) => {
-
-    var hash = crypto.createHash('sha256').update(req.body.apiKey).digest('base64');
-    console.log(hash);
-    try {
-        const apiKeyData = await apiKeyModel.findOne({ apiKey: hash });
-        if (apiKeyData) {
-            const users = await UserModel.find({});
-            res.send(users);
-        }
-        else {
-            res.status(401).send("Unauthorized");
-        }
     }
     catch (e) {
         res.status(500).send(e);
