@@ -8,14 +8,14 @@ const apiKeyModel = require('./models/apiKey_models');
 
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 app.use(helmet());
 
 app.post('/users', async (req, res) => {
     const user = new UserModel(req.body);
     //Joi input validation
     var err = user.joiValidate(req.body);
-    //console.log(err.error);
+    console.log(req.body);
     if (err.error) {
         console.log(err.error.details[0].message);
         res.status(400).send(err.error.details[0].message);
@@ -28,7 +28,7 @@ app.post('/users', async (req, res) => {
             //If hashed key has been found, we proceed with the POST request
             if (apiKeyFound) {
                 await user.save();
-                res.status(201).send('OK, message successfully posted');           
+                res.status(201).send('Message successfully created');           
             }
             else{
                 res.status(401).send({ error: "Invalid API key" });

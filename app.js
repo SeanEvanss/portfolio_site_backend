@@ -1,17 +1,21 @@
 require('dotenv').config();
-const PORT = 8000;
+const PORT = 8080;
 
 const Mongoose = require('mongoose');
 const express = require('express');
 const Routes = require('./routes');
 const helmet = require('helmet');
+const cors = require('cors');
+
 const uri = process.env.MONGODB_URI;
 
-
 const app= express();
+//I have temporarily allowed all sources for CORS but this will be updated during production.
+app.use(cors({
+    origin: '*',
+}));
 app.use(express.json());
 app.use(helmet());
-
 
 Mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
