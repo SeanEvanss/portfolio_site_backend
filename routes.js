@@ -15,9 +15,9 @@ app.post('/users', async (req, res) => {
     const user = new UserModel(req.body);
     //Joi input validation
     var err = user.joiValidate(req.body);
-    //console.log(err.error);
+    console.log(req.body);
     if (err.error) {
-        //console.log(err.error.details[0].message);
+        console.log(err.error.details[0].message);
         res.status(400).send(err.error.details[0].message);
     }
     else {
